@@ -1,0 +1,48 @@
+<% user_location = user.location %>
+
+<div data-controller="location-dropdown">
+
+  <%# Country %>
+  <div class="mb-3">
+    <%= f.label :country, "Country" %>
+    <%= select_tag :country,
+          "",
+          class: "form-select",
+          data: {
+            action: "change->location-dropdown#countryChanged",
+            location_dropdown_target: "country",
+            selected: user_location&.country
+          } %>
+  </div>
+
+  <%# State %>
+  <div class="mb-3">
+    <%= f.label :province, "State" %>
+    <%= select_tag :province,
+          "",
+          class: "form-select",
+          data: {
+            action: "change->location-dropdown#stateChanged",
+            location_dropdown_target: "state",
+            selected: user_location&.province
+          } %>
+  </div>
+
+  <%# City %>
+  <div class="mb-3">
+    <%= f.label :city, "City" %>
+    <%= select_tag :city,
+          "",
+          class: "form-select",
+          data: {
+            action: "change->location-dropdown#cityChanged",
+            location_dropdown_target: "city",
+            selected: user_location&.id
+          } %>
+  </div>
+
+  <%# Hidden field for location_id %>
+  <%= f.hidden_field :location_id,
+        data: { location_dropdown_target: "locationId" },
+        value: user_location&.id %>
+</div>
