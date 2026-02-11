@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_10_225817) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_11_183957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,9 +18,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_10_225817) do
     t.string "country", null: false
     t.string "province", null: false
     t.string "city"
-    t.string "abbreviation", limit: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unique_identifier"
     t.index ["country", "province", "city"], name: "index_locations_on_country_province_city", unique: true
   end
 

@@ -2,13 +2,13 @@
 #
 # Table name: locations
 #
-#  id           :bigint           not null, primary key
-#  abbreviation :string(10)       not null
-#  city         :string
-#  country      :string           not null
-#  province     :string           not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id                :bigint           not null, primary key
+#  city              :string
+#  country           :string           not null
+#  province          :string           not null
+#  unique_identifier :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 # Indexes
 #
@@ -17,6 +17,11 @@
 class Location < ApplicationRecord
   has_many :users
 
-  validates :country, :province, :abbreviation, presence: true
-  validates :abbreviation, uniqueness: true
+  validates :country, :province, :city, presence: true
+  validates :city, uniqueness: { scope: [:country, :province], message: "already exists in this province" }, allow_blank: true
+
+  # Unique identifier helper
+  def self.generate_unique_identifier(country_code, state_code, city_name)
+    "#{country_code.upcase}-#{state_code.upcase}-#{city_name.parameterize(separator: '_')}"
+  end
 end
