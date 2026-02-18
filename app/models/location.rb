@@ -5,8 +5,10 @@
 #  id                :bigint           not null, primary key
 #  active            :boolean
 #  city              :string
+#  continent         :string
 #  country           :string           not null
 #  province          :string           not null
+#  tdwg_code         :string
 #  unique_identifier :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -16,6 +18,8 @@
 #  index_locations_on_country_province_city  (country,province,city) UNIQUE
 #
 class Location < ApplicationRecord
+  include WgsrpdCodes
+
   has_many :users
 
   validates :country, :province, :city, presence: true

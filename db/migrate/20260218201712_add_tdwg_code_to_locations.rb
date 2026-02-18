@@ -1,0 +1,5 @@
+class AddTdwgCodeToLocations < ActiveRecord::Migration[8.0]
+  def change
+    add_column :locations, :tdwg_code, :string
+  end
+end
