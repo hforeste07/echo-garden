@@ -31,6 +31,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :location
+  has_many :gardens, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true

@@ -10,15 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_18_215206) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_24_173516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "import_progresses", force: :cascade do |t|
-    t.string "key"
-    t.string "value"
+  create_table "garden_plots", force: :cascade do |t|
+    t.bigint "garden_id"
+    t.bigint "plant_id"
+    t.integer "row"
+    t.integer "column"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["garden_id"], name: "index_garden_plots_on_garden_id"
+    t.index ["plant_id"], name: "index_garden_plots_on_plant_id"
+  end
+
+  create_table "gardens", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.integer "rows"
+    t.integer "columns"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "favorite", default: false, null: false
+    t.index ["user_id"], name: "index_gardens_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -220,6 +235,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_18_215206) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "garden_plots", "gardens"
+  add_foreign_key "garden_plots", "plants"
+  add_foreign_key "gardens", "users"
   add_foreign_key "plant_native_regions", "plants"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

@@ -1,0 +1,18 @@
+<h1>Welcome, <%= current_user.first_name %>!</h1>
+
+<h2>Your Favorite Garden</h2>
+<% if @favorite_garden %>
+  <%= render partial: "gardens/grid", locals: { garden: @favorite_garden, plots: @garden_plots } %>
+<% else %>
+  <p>You don’t have any gardens yet. <%= link_to "Create your first garden", new_garden_path %></p>
+<% end %>
+
+<h3>All Your Gardens</h3>
+<ul>
+  <% @gardens.each do |garden| %>
+    <li>
+      <%= link_to garden.name, garden_path(garden) %>
+      <% if garden.favorite? %>⭐<% end %>
+    </li>
+  <% end %>
+</ul>

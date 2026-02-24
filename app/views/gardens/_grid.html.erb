@@ -1,0 +1,41 @@
+<!-- app/views/gardens/_grid.html.erb -->
+<div class="garden-grid" style="display: grid; grid-template-columns: repeat(<%= garden.columns %>, 1fr); gap: 2px;">
+  <% garden.garden_plots.order(:row, :column).each do |plot| %>
+    <div
+      class="garden-cell"
+      style="background-color: <%= plot.plant ? 'green' : 'brown' %>; 
+             width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; position: relative;"
+      title="<%= plot.plant ? plot.plant.common_name : 'Empty plot' %>"
+    >
+      <% if plot.plant %>
+        <span class="plant-tooltip"><%= plot.plant.common_name %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  .garden-cell {
+    border: 1px solid #555;
+    cursor: pointer;
+  }
+
+  .garden-cell:hover .plant-tooltip {
+    display: block;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .plant-tooltip {
+    display: none;
+  }
+</style>

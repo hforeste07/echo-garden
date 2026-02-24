@@ -1,0 +1,9 @@
+<h2><%= @garden.name %></h2>
+
+<p>
+  Rows: <%= @garden.rows %>, Columns: <%= @garden.columns %>
+</p>
+
+<%= render partial: "gardens/grid", locals: { garden: @garden } %>
+
+<%= link_to "Back to Dashboard", dashboard_path, class: "btn btn-secondary mt-3" %>

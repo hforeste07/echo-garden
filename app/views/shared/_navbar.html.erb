@@ -11,7 +11,17 @@
             Account
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-           <% if user_signed_in? %>
+            <% if user_signed_in? %>
+              <% if current_user.gardens.any? %>
+                <li class="dropdown-header">My Gardens</li>
+                <% current_user.gardens.each do |garden| %>
+                  <li>
+                    <%= link_to garden.name, garden_path(garden), class: "dropdown-item" %>
+                  </li>
+                <% end %>
+                <li><hr class="dropdown-divider"></li>
+              <% end %>
+
               <li><%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
             <% else %>
