@@ -6,6 +6,19 @@ class GardensController < ApplicationController
     @gardens = current_user.gardens
   end
 
+  def new
+    @garden = current_user.gardens.new
+  end
+
+  def create
+    @garden = current_user.gardens.new(garden_params) 
+    if @garden.save
+      redirect_to @garden, notice: "Garden created successfully."
+    else
+      render :new, alert: @garden.errors.full_messages.join(", ")
+    end
+  end
+
   def show
     # @garden is already set by set_garden
   end
@@ -36,7 +49,7 @@ class GardensController < ApplicationController
     redirect_to dashboard_path, alert: "Garden not found."
   end
 
-  def garden_params 
-    params.require(:garden).permit(:id)
+  def garden_params
+    params.require(:garden).permit(:name, :rows, :columns)
   end
 end

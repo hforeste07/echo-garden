@@ -1,0 +1,30 @@
+<h1>Create a New Garden</h1>
+
+<%= form_with model: @garden, local: true do |form| %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :rows, "Number of Rows", class: "form-label" %>
+    <%= form.number_field :rows,
+                          class: "form-control",
+                          min: 1,
+                          max: 50,
+                          required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :columns, "Number of Columns", class: "form-label" %>
+    <%= form.number_field :columns,
+                          class: "form-control",
+                          min: 1,
+                          max: 50,
+                          required: true %>
+  </div>
+
+  <%= form.submit "Create Garden", class: "btn btn-primary" %>
+
+<% end %>
