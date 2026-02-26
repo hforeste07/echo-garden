@@ -1,9 +1,21 @@
 <!-- Hero Section -->
-<section class="bg-theme-light text-theme-primary text-center py-5" style="background-image: url(<%= asset_path('/landingpage/nativegardenCA.jpg') %>); background-size: cover; background-position: center;">
-  <div class="container">
-    <h1 class="display-4 fw-bold">Grow A Native Garden with Ease</h1>
-    <p class="lead mb-4">Plan, track, and optimize your garden plots and plants — all in one app.</p>
-    <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+<!-- Hero Section -->
+<section class="text-center">
+  <!-- Top Image -->
+  <div style="background-image: url('<%= asset_path('landing_page/nativegardenCA.jpg') %>'); 
+              background-size: cover; 
+              background-position: center; 
+              height: 400px; 
+              width: 100%;">
+  </div>
+
+  <!-- Text & CTA -->
+  <div class="bg-theme-light text-theme-primary py-5">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Grow A Native Garden with Ease</h1>
+      <p class="lead mb-4">Plan, track, and optimize your garden plots and plants — all in one app.</p>
+      <%= link_to "Get Started", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+    </div>
   </div>
 </section>
 
