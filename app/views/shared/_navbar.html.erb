@@ -20,7 +20,9 @@
                   </li>
                 <% end %>
                 <li><hr class="dropdown-divider"></li>
-              <% end %>
+                <li class="dropdown-item">Create Garden</li>
+                <li><hr class="dropdown-divider"></li>
+                <% end %>
 
               <li><%= button_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %></li>
               <li><%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
