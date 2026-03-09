@@ -4,21 +4,22 @@ User.destroy_all
 
 # Sample Alice in Wonderland–themed users
 characters = [
-  { first_name: "Alice", last_name: "Liddell", email: "alice@example.com" }, 
-  { first_name: "Mad Hatter", last_name: "Hatson", email: "mad.hatter@example.com" }, 
-  { first_name: "Cheshire", last_name: "Cat", email: "cheshire.cat@example.com" }, 
-  { first_name: "White", last_name: "Rabbit", email: "white.rabbit@example.com" }, 
-  { first_name: "Queen", last_name: "Hearts", email: "queen.hearts@example.com" }, 
-  { first_name: "March", last_name: "Hare", email: "march.hare@example.com" }, 
-  { first_name: "Tweedle", last_name: "Dee", email: "tweedle.dee@example.com" }, 
-  { first_name: "Tweedle", last_name: "Dum", email: "tweedle.dum@example.com" }, 
-  { first_name: "Caterpillar", last_name: "Absolem", email: "caterpillar@example.com" }, 
+  { first_name: "Alice", last_name: "Liddell", email: "alice@example.com" },
+  { first_name: "Mad Hatter", last_name: "Hatson", email: "mad.hatter@example.com" },
+  { first_name: "Cheshire", last_name: "Cat", email: "cheshire.cat@example.com" },
+  { first_name: "White", last_name: "Rabbit", email: "white.rabbit@example.com" },
+  { first_name: "Queen", last_name: "Hearts", email: "queen.hearts@example.com" },
+  { first_name: "March", last_name: "Hare", email: "march.hare@example.com" },
+  { first_name: "Tweedle", last_name: "Dee", email: "tweedle.dee@example.com" },
+  { first_name: "Tweedle", last_name: "Dum", email: "tweedle.dum@example.com" },
+  { first_name: "Caterpillar", last_name: "Absolem", email: "caterpillar@example.com" },
   { first_name: "Dormouse", last_name: "Sleepy", email: "dormouse@example.com" }
 ]
 
 # Create users first
 users_created = characters.map do |char|
   location = Location.order("RANDOM()").first
+  # NOTE: This is broken. ActiveRecord::RecordInvalid: Validation failed: Location can't be blank (ActiveRecord::RecordInvalid)
   User.create!(
     first_name: char[:first_name],
     last_name: char[:last_name],
